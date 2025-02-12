@@ -86,9 +86,11 @@ async function migrateTable(table) {
     // Insert data
     await destClient.query(query, params);
     console.log(`Migrated ${rows.length} rows to ${table}`);
-  } finally {
     sourceClient.release();
     destClient.release();
+  } catch (error) {
+    console.error("Migration failed:", error);
+    throw error;
   }
 }
 
