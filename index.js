@@ -5,6 +5,19 @@ const { Pool } = require('pg');
 const app = express();
 app.use(express.json());
 
+// Error handler middleware
+app.use((err, req, res, next) => {
+  console.error('Error:', err.message);
+  console.error('Stack:', err.stack);
+  
+  res.status(500).json({
+    error: true,
+    message: 'An internal server error occurred',
+    details: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+});
+
+
 // Database configurations
 const sourcePool = new Pool({
   host: process.env.SOURCE_DB_HOST,
@@ -70,6 +83,19 @@ async function migrateTable(table) {
     destClient.release();
   }
 }
+
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
+app.get('/migrate', async (req, res) => {
+  try {
+    res.status(200).json({ message: 'Migration completed successfully' });
+  } catch (error) {
+    console.error('Migration failed:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 app.post('/migrate', async (req, res) => {
   try {
