@@ -85,7 +85,13 @@ async function migrateTable(table) {
 }
 
 app.get('/', (req, res) => {
-  res.send('Hello World');
+  try {
+    console.log('Server is running');
+    res.status(200).json({ message: 'Server is running' });
+  } catch (error) {
+    console.error('Server failed:', error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.get('/migrate', async (req, res) => {
