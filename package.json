@@ -1,0 +1,25 @@
+{
+  "name": "db-migration",
+  "version": "1.0.0",
+  "description": "Data migration from RDS postgreSQL to DigitalOcean postgreSQL database for test environment.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fahadfahim13/db-migration.git"
+  },
+  "author": "Fahim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fahadfahim13/db-migration/issues"
+  },
+  "homepage": "https://github.com/fahadfahim13/db-migration#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.13.2"
+  }
+}
