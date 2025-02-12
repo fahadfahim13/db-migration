@@ -24,6 +24,9 @@ const sourcePool = new Pool({
   user: process.env.SOURCE_DB_USER,
   password: process.env.SOURCE_DB_PASSWORD,
   database: process.env.SOURCE_DB_NAME,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 const destPool = new Pool({
