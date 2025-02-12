@@ -62,8 +62,8 @@ async function migrateTable(table) {
 
     if (rows.length === 0) return;
 
-    // Clear destination table
-    await destClient.query(`TRUNCATE TABLE ${table}`);
+    // Clear destination table with CASCADE to handle foreign key constraints
+    await destClient.query(`TRUNCATE TABLE ${table} CASCADE`);
 
     // Generate insert query
     const placeholders = rows
